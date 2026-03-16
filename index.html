@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fietsrommelmarkt Middel – 14 mei 2026</title>
+  <meta name="description" content="Op Hemelvaartsdag 14 mei 2026 organiseert Plaatselijk Belang Middel de Fietsrommelmarkt. Gratis toegang, fietsen langs alle kraampjes van 10:00 tot 14:00 uur." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #2d7a3a;
+      --green-dark: #1e5528;
+      --green-light:#e8f5eb;
+      --orange:     #e07b20;
+      --text:       #1a1a1a;
+      --muted:      #555;
+      --radius:     12px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f7f9f7;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .bike-icon { font-size: 3.5rem; display: block; margin-bottom: .5rem; }
+
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.15;
+    }
+
+    header h1 span { color: #f9d06b; }
+
+    header p.tagline {
+      margin-top: .75rem;
+      font-size: 1.1rem;
+      opacity: .9;
+    }
+
+    /* ── DATE BADGE ── */
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: .55rem 1.2rem;
+      border-radius: 999px;
+      margin-top: 1.25rem;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.4rem 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .card h3 {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: .2rem;
+    }
+
+    .card p {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    /* ── SECTION HEADING ── */
+    h2 {
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    /* ── MAP SECTION ── */
+    .map-section {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      margin-bottom: 1.5rem;
+    }
+
+    .map-section p {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .map-embed {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--green-light);
+      margin-bottom: 1.25rem;
+    }
+
+    .map-embed iframe {
+      display: block;
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+
+    .map-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .7rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: filter .15s, transform .1s;
+    }
+
+    .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+    }
+
+    /* ── QR CODE ── */
+    .qr-section {
+      background: var(--green-light);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .qr-section img {
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.12);
+      flex-shrink: 0;
+    }
+
+    .qr-text h2 { margin-bottom: .5rem; }
+    .qr-text p { color: var(--muted); font-size: .95rem; }
+
+    /* ── PARTICIPATE ── */
+    .participate-section {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      margin-bottom: 1.5rem;
+    }
+
+    .participate-section ul {
+      list-style: none;
+      margin: .75rem 0 1.25rem;
+    }
+
+    .participate-section ul li {
+      padding: .35rem 0;
+      padding-left: 1.6rem;
+      position: relative;
+      color: var(--muted);
+    }
+
+    .participate-section ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .mail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      color: var(--green-dark);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.05rem;
+      border-bottom: 2px solid var(--green);
+    }
+
+    .mail-link:hover { color: var(--green); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: .875rem;
+      border-top: 1px solid #e0e7e0;
+    }
+
+    footer a { color: var(--green-dark); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="bike-icon">🚲</span>
+  <h1>Fietsrommelmarkt<br><span>Middel</span></h1>
+  <p class="tagline">Fietsen langs kraampjes op eigen terrein – gratis toegang &amp; deelname</p>
+  <div class="date-badge">📅 Hemelvaartsdag · donderdag 14 mei 2026</div>
+</header>
+
+<main>
+
+  <!-- Info cards -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🕙</div>
+      <div>
+        <h3>Openingstijden</h3>
+        <p>10:00 – 14:00 uur</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎟️</div>
+      <div>
+        <h3>Toegang</h3>
+        <p>Helemaal gratis</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📍</div>
+      <div>
+        <h3>Locaties</h3>
+        <p>Op eigen terrein, in en om Middel</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚲</div>
+      <div>
+        <h3>Route</h3>
+        <p>Alle kraampjes per fiets te bezoeken</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-section">
+    <h2>🗺️ Kaart met alle locaties</h2>
+    <p>Hieronder ziet u een overzicht van alle deelnemende adressen. Klik op een markering voor het adres en het assortiment.</p>
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1DITXIkKRgmJZby-sHjKuVoUvcQU_lk4"
+        title="Kaart Fietsrommelmarkt Middel"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="map-buttons">
+      <a class="btn btn-primary"
+         href="https://www.google.com/maps/d/viewer?mid=1DITXIkKRgmJZby-sHjKuVoUvcQU_lk4"
+         target="_blank" rel="noopener">
+        🗺️ Open kaart in Google Maps
+      </a>
+    </div>
+  </div>
+
+  <!-- QR code -->
+  <div class="qr-section">
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fviewer%3Fmid%3D1DITXIkKRgmJZby-sHjKuVoUvcQU_lk4"
+      alt="QR-code voor de plattegrond" />
+    <div class="qr-text">
+      <h2>📱 Plattegrond op je telefoon</h2>
+      <p>Scan de QR-code om de kaart met alle locaties direct op uw telefoon te openen. Handig om mee te nemen tijdens het fietsen!</p>
+    </div>
+  </div>
+
+  <!-- Participate -->
+  <div class="participate-section">
+    <h2>🏡 Uw adres op de kaart?</h2>
+    <p>Wilt u ook meedoen met de Fietsrommelmarkt? Deelname is gratis! U plaatst uw kraampje op eigen terrein.</p>
+    <ul>
+      <li>Deelname is volledig gratis</li>
+      <li>Kraampje op eigen terrein</li>
+      <li>Uw adres en assortiment op de kaart</li>
+    </ul>
+    <p>Mail uw <strong>adres</strong> en <strong>assortiment</strong> naar:</p>
+    <br />
+    <a class="mail-link" href="mailto:info@plaatselijkbelangmiddel.nl">
+      ✉️ info@plaatselijkbelangmiddel.nl
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  <p>Georganiseerd door <a href="mailto:info@plaatselijkbelangmiddel.nl">Plaatselijk Belang Middel</a></p>
+  <p style="margin-top:.4rem">Fietsrommelmarkt Middel &middot; 14 mei 2026</p>
+</footer>
+
+</body>
+</html>
