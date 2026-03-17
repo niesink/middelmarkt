@@ -239,6 +239,59 @@
 
     .mail-link:hover { color: var(--green); }
 
+    /* ── STALLS LIST ── */
+    .stalls-section {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      margin-bottom: 1.5rem;
+    }
+
+    .stalls-section p.intro {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .stall-list {
+      list-style: none;
+      display: grid;
+      gap: .6rem;
+    }
+
+    .stall-item {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      background: var(--green-light);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+    }
+
+    .stall-number {
+      font-weight: 800;
+      color: var(--green-dark);
+      font-size: .85rem;
+      min-width: 1.5rem;
+      padding-top: .1rem;
+    }
+
+    .stall-address {
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .stall-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-top: .1rem;
+    }
+
+    .stall-loading, .stall-error {
+      color: var(--muted);
+      font-style: italic;
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -327,6 +380,15 @@
     </div>
   </div>
 
+  <!-- Stalls list -->
+  <div class="stalls-section">
+    <h2>📋 Deelnemende kraampjes</h2>
+    <p class="intro">Hieronder vindt u alle deelnemende adressen met een korte beschrijving van het aanbod.</p>
+    <ul class="stall-list" id="stall-list">
+      <li class="stall-loading">Adressen worden geladen…</li>
+    </ul>
+  </div>
+
   <!-- Participate -->
   <div class="participate-section">
     <h2>🏡 Uw adres op de kaart?</h2>
@@ -349,6 +411,55 @@
   <p>Georganiseerd door <a href="mailto:info@plaatselijkbelangmiddel.nl">Plaatselijk Belang Middel</a></p>
   <p style="margin-top:.4rem">Fietsrommelmarkt Middel &middot; 14 mei 2026</p>
 </footer>
+
+<script>
+  // Laad kramen.csv en render de lijst
+  fetch('kramen.csv')
+    .then(r => {
+      if (!r.ok) throw new Error('Kon kramen.csv niet laden');
+      return r.text();
+    })
+    .then(csv => {
+      const lines = csv.trim().split('\n').slice(1); // sla header-rij over
+      const items = lines
+        .map(line => {
+          // Eenvoudige CSV-parser: ondersteunt velden tussen aanhalingstekens
+          const cols = [];
+          let cur = '', inQuotes = false;
+          for (let i = 0; i < line.length; i++) {
+            const ch = line[i];
+            if (ch === '"') { inQuotes = !inQuotes; }
+            else if (ch === ',' && !inQuotes) { cols.push(cur.trim()); cur = ''; }
+            else { cur += ch; }
+          }
+          cols.push(cur.trim());
+          return { adres: cols[0] || '', omschrijving: cols[1] || '' };
+        })
+        .filter(item => item.adres);
+
+      const list = document.getElementById('stall-list');
+      if (items.length === 0) {
+        list.innerHTML = '<li class="stall-loading">Nog geen deelnemers aangemeld.</li>';
+        return;
+      }
+      list.innerHTML = items.map((item, i) => `
+        <li class="stall-item">
+          <span class="stall-number">${i + 1}.</span>
+          <div>
+            <div class="stall-address">📍 ${escHtml(item.adres)}</div>
+            ${item.omschrijving ? `<div class="stall-desc">${escHtml(item.omschrijving)}</div>` : ''}
+          </div>
+        </li>`).join('');
+    })
+    .catch(() => {
+      document.getElementById('stall-list').innerHTML =
+        '<li class="stall-error">Kon de lijst met kraampjes niet laden.</li>';
+    });
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
 
 </body>
 </html>
