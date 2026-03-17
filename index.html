@@ -71,41 +71,36 @@
       padding: 2rem 1.25rem 4rem;
     }
 
-    /* ── CARDS ── */
-    .cards {
+    /* ── NAV CARDS ── */
+    .nav-cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin: 2rem 0;
     }
 
-    .card {
-      background: #fff;
+    .nav-card {
+      background: var(--green);
+      color: #fff;
       border-radius: var(--radius);
       padding: 1.4rem 1.25rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 1rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: filter .15s, transform .1s;
     }
 
-    .card-icon {
+    .nav-card:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .nav-card:active { transform: translateY(0); }
+
+    .nav-card-icon {
       font-size: 2rem;
       flex-shrink: 0;
       line-height: 1;
-    }
-
-    .card h3 {
-      font-size: .8rem;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--muted);
-      margin-bottom: .2rem;
-    }
-
-    .card p {
-      font-size: 1.05rem;
-      font-weight: 600;
     }
 
     /* ── SECTION HEADING ── */
@@ -312,44 +307,25 @@
   <h1>Fietsrommelmarkt<br><span>Middel</span></h1>
   <p class="tagline">Fietsen langs kraampjes op eigen terrein – gratis toegang &amp; deelname</p>
   <div class="date-badge">📅 Hemelvaartsdag · donderdag 14 mei 2026</div>
+  <div class="date-badge" style="background: var(--green-dark); margin-top: .6rem;">🕙 10:00 – 14:00 uur</div>
 </header>
 
 <main>
 
-  <!-- Info cards -->
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">🕙</div>
-      <div>
-        <h3>Openingstijden</h3>
-        <p>10:00 – 14:00 uur</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎟️</div>
-      <div>
-        <h3>Toegang</h3>
-        <p>Helemaal gratis</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-icon">📍</div>
-      <div>
-        <h3>Locaties</h3>
-        <p>Op eigen terrein, in en om Middel</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🚲</div>
-      <div>
-        <h3>Route</h3>
-        <p>Alle kraampjes per fiets te bezoeken</p>
-      </div>
-    </div>
+  <!-- Nav cards -->
+  <div class="nav-cards">
+    <a class="nav-card" href="#kaart">
+      <span class="nav-card-icon">🗺️</span>
+      Kaart bekijken
+    </a>
+    <a class="nav-card" href="#adressen">
+      <span class="nav-card-icon">📋</span>
+      Adressen bekijken
+    </a>
   </div>
 
   <!-- Map -->
-  <div class="map-section">
+  <div class="map-section" id="kaart">
     <h2>🗺️ Kaart met alle locaties</h2>
     <p>Hieronder ziet u een overzicht van alle deelnemende adressen. Klik op een markering voor het adres en het assortiment.</p>
     <div class="map-embed">
@@ -381,7 +357,7 @@
   </div>
 
   <!-- Stalls list -->
-  <div class="stalls-section">
+  <div class="stalls-section" id="adressen">
     <h2>📋 Deelnemende kraampjes</h2>
     <p class="intro">Hieronder vindt u alle deelnemende adressen met een korte beschrijving van het aanbod.</p>
     <ul class="stall-list" id="stall-list">
